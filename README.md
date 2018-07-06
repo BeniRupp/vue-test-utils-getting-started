@@ -1,7 +1,8 @@
 # Getting started with `vue-test-utils`
 
-## Setup
+Demo of bug with `find(Component).exists()`.
 
+## Setup
 ``` bash
 npm install
 npm test

@@ -1,25 +1,28 @@
 // Import the mount() method from the test utils
 // and the component you want to test
 import { mount } from '@vue/test-utils'
-import Counter from './counter'
+import Wrapper from './components/wrapper'
+import Box from "./components/box"
+import Hello from "./components/hello"
 
-describe('Counter', () => {
-  // Now mount the component and you have the wrapper
-  const wrapper = mount(Counter)
+describe.only('Wrapper', () => {
+  it('should show differences between find(Component) and find(className)', () => {
+    const wrapper = mount(Wrapper)
 
-  it('renders the correct markup', () => {
-    expect(wrapper.html()).toContain('<span class="count">0</span>')
-  })
+    console.log(wrapper.html())
+    console.log(wrapper.find(Box).exists())
+    console.log(wrapper.find(Hello).exists())
+    console.log((wrapper === wrapper.find(Hello)))
 
-  // it's also easy to check for the existence of elements
-  it('has a button', () => {
-    expect(wrapper.contains('button')).toBe(true)
-  })
+    console.log(wrapper.findAll(Hello).length)
+    const helloElements = wrapper.findAll(Hello)
+    console.log(helloElements.at(0).html())
+    console.log(helloElements.at(1).html())
+    console.log('----')
+    console.log(wrapper.find(Hello).html())
 
-  it('button should increment the count', () => {
-    expect(wrapper.vm.count).toBe(0)
-    const button = wrapper.find('button')
-    button.trigger('click')
-    expect(wrapper.vm.count).toBe(1)
+
+    console.log(wrapper.find('.hello-message').exists())
+    console.log(wrapper.findAll('.hello-message').length)
   })
 })
